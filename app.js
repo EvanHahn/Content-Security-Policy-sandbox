@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var browserify = require('browserify-middleware');
+var constants = require('./constants');
 
 var app = express();
 
@@ -9,34 +9,39 @@ app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.disable('x-powered-by');
 
+app.locals.constants = constants;
+
 app.use(function (req, res, next) {
   res.set('X-XSS-Protection', '0');
   next();
 });
 
 app.use(function (req, res, next) {
-  var csp = req.query.csp;
-
-  if (Array.isArray(csp)) {
-    csp = csp[0];
+  var currentHeader;
+  if (constants.headers.indexOf(req.query.header) === -1) {
+    currentHeader = constants.headers[0];
+  } else {
+    currentHeader = req.query.header;
   }
 
-  if (!csp) {
-    res.locals.csp = "default-src 'self'";
-    next();
-    return;
+  var policy;
+  if (Array.isArray(req.query.policy)) {
+    policy = req.query.policy[0];
+  } else {
+    policy = req.query.policy;
   }
 
-  res.set('Content-Security-Policy', csp);
+  if (policy) {
+    res.set(currentHeader, policy);
+  }
 
-  res.locals.csp = csp;
+  res.locals.policy = policy || constants.defaultPolicy;
+  res.locals.currentHeader = currentHeader;
 
   next();
 });
 
 app.use(express.static(path.resolve(__dirname, 'public')));
-
-app.get('/main.js', browserify(path.resolve(__dirname, 'assets', 'main.js')));
 
 app.get('/', function (req, res) {
   res.render('index');

@@ -14,11 +14,18 @@
 <p>Type a CSP here and it'll be set.</p>
 
 <form action="/" method="get">
-  <textarea name="csp"><%- csp %></textarea>
+  <textarea name="policy"><%- policy %></textarea>
+  <select name="header">
+    <% constants.headers.forEach(function (header) { %>
+      <% if (header === currentHeader) { %>
+        <option selected value="<%= header %>"><%= header %></option>
+      <% } else { %>
+        <option value="<%= header %>"><%= header %></option>
+      <% } %>
+    <% }) %>
+  </select>
   <input type="submit" value="Go">
 </form>
-
-<script src="main.js"></script>
 
 </body>
 </html>
