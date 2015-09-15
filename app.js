@@ -21,7 +21,8 @@ app.use(function (req, res, next) {
     csp = csp[0];
   }
 
-  if (csp === undefined) {
+  if (!csp) {
+    res.locals.csp = "default-src 'self'";
     next();
     return;
   }
