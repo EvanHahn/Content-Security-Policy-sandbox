@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>Content Security Policy sandbox</title>
+<link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+
+<h1>Content Security Policy test app</h1>
+
+<p>Type a CSP here and it'll be set.</p>
+
+<form action="/" method="get">
+  <textarea name="csp"><%- csp %></textarea>
+  <input type="submit" value="Go">
+</form>
+
+<script src="main.js"></script>
+
+</body>
+</html>
