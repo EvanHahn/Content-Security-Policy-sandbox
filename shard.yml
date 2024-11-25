@@ -1,0 +1,13 @@
+name: csp_sandbox
+version: 0.1.0
+
+authors:
+  - Evan Hahn <me@evanhahn.com>
+
+targets:
+  csp_sandbox:
+    main: src/csp_sandbox.cr
+
+crystal: '>= 1.14.0'
+
+license: Unlicense

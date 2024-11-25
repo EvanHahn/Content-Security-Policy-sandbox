@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CSP sandbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0 auto;
+        padding: 1em;
+        width: 100%;
+        max-width: 600px;
+        font-family: sans-serif;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      textarea {
+        font-family: monospace;
+        height: 10em;
+        resize: vertical;
+      }
+
+      input[type="submit"] {
+        margin-top: 1rem;
+        font: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" method="get">
+      <h1>Content Security Policy sandbox</h1>
+
+      <p>
+        <label for="policy">Enter a CSP here and it will be set.</label>
+      </p>
+
+      <textarea id="policy" name="policy" rows="1"><%= input_value %></textarea>
+
+      <input type="submit" value="Go" />
+    </form>
+  </body>
+</html>

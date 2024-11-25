@@ -1,8 +1,0 @@
-{
-  "defaultPolicy": "default-src 'self'",
-  "headers": [
-    "Content-Security-Policy",
-    "X-Content-Security-Policy",
-    "X-WebKit-CSP"
-  ]
-}
